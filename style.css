@@ -21,6 +21,7 @@ body {
 button{
     width: 10%;
     background-color: darkgoldenrod;
+    border-color: gray;
 }
 .date_clicked{
     height: 10%;
