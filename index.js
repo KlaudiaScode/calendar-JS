@@ -86,12 +86,17 @@ function renderCalendar(currentYear,currentMonth,currentDay){
     renderEmptyDivs(firstDay);
 
     daysArray.forEach((dayNumber) => {
+        //uchwyt do diva
         const dayElement = document.createElement("div");
         dayElement.textContent = dayNumber;
-        dayElement.className = "single_day";
+        //nadanie klasy elementowi dayElement
+        dayElement.className = "single_day proper_day";
+        //warunek jeśli numer dnia jest równy obecnemu 
         if (dayNumber === day){
-            dayElement.className = "single_day today";
+            //to nadaj mu osobną klasę 
+            dayElement.className = "single_day proper_day today";
         }
+        dayElement.setAttribute("data-date", `${year}-${('0' + (month + 1)).slice(-2)}-${('0' + dayNumber).slice(-2)}`);
         singleDayContainer.append(dayElement);
     });
     //zmienna zawierająca następny miesiąc
@@ -124,3 +129,10 @@ function renderEmptyDivs(firstDay){
         singleDayContainer.append(emptyDiv);
     }
 }
+
+singleDayContainer.addEventListener('click',function(event){
+    if(event.target.className.includes("proper_day")){
+        console.log(event.target.dataset.date)
+    }
+    
+})
