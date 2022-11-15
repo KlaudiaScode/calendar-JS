@@ -101,7 +101,7 @@ function renderCalendar(currentYear,currentMonth,currentDay){
     });
     //zmienna zawierająca następny miesiąc
     const nextDate = new Date (year,month+1,day);
-    //dodanie atrybutu do przycisku NEXT 
+    //ustawienie wartości atrybutu (nazwa atrybutu , wartość przypisana do atrybutu)
     buttonNext.setAttribute("data-date",`${nextDate.getFullYear()}-${('0'+ (nextDate.getMonth()+1)).slice(-2)}-`
       +('0'+ nextDate.getDate()).slice(-2));
 
@@ -129,10 +129,11 @@ function renderEmptyDivs(firstDay){
         singleDayContainer.append(emptyDiv);
     }
 }
-
+//nasłuchiwanie na zdarzenie
 singleDayContainer.addEventListener('click',function(event){
+    //warunek wykonaj jeśli kliknięty został obiekt o klasie proper_day
     if(event.target.className.includes("proper_day")){
-        console.log(event.target.dataset.date)
+        console.log(event.target.dataset.date);
     }
     
 })
