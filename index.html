@@ -10,9 +10,9 @@
   <body>
     <div class="calendar_body">
       <div class="header">
-        <button id="back" type="button" class="back">ᐊ</button>
+        <button id="back" type="button" class="back">⮜</button>
         <div id="date_clicked"class="date_clicked">DATE</div>
-        <button id="next" type="button" class="next">ᐅ</button>
+        <button id="next" type="button" class="next">⮞</button>
       </div>
       <div class="table">
         <div class="days_of_the_week">
@@ -27,6 +27,14 @@
         <div id="days_of_the_month"class="days_of_the_month">
         </div>
       </div>
+      <form id="form">
+        <div class="task">
+        <span id="date"></span>
+        <input name="time" type="time" class="task_time"/>
+        <textarea name="contents" placeholder="wpisz treść zadania"class="contents"></textarea>
+        <input name="add" type="button" id="add" value="Dodaj"/>
+      </div>
+      </form>
     </div>
 	<script src="index.js"></script>
   </body>

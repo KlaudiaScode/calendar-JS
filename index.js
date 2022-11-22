@@ -1,6 +1,9 @@
-const singleDayContainer = document.getElementById("days_of_the_month");
+const singleDayContainer = document.getElementById('days_of_the_month');
 const buttonNext = document.querySelector('button.next');
 const buttonBack = document.querySelector('button.back');
+const buttonAdd = document.querySelector('#add');
+const taskDateElement = document.querySelector('#date');
+
 //funckja tworzenia daty 
 function createDataSet(year,month,day){
     //zmienna zawierająca obecną datę
@@ -96,6 +99,7 @@ function renderCalendar(currentYear,currentMonth,currentDay){
             //to nadaj mu osobną klasę 
             dayElement.className = "single_day proper_day today";
         }
+       
         dayElement.setAttribute("data-date", `${year}-${('0' + (month + 1)).slice(-2)}-${('0' + dayNumber).slice(-2)}`);
         singleDayContainer.append(dayElement);
     });
@@ -129,11 +133,38 @@ function renderEmptyDivs(firstDay){
         singleDayContainer.append(emptyDiv);
     }
 }
-//nasłuchiwanie na zdarzenie
+//nasłuchiwanie kliknięcia na wybrany dzień w miesiącu 
 singleDayContainer.addEventListener('click',function(event){
+    const task = document.querySelector('div.task');
     //warunek wykonaj jeśli kliknięty został obiekt o klasie proper_day
     if(event.target.className.includes("proper_day")){
-        console.log(event.target.dataset.date);
+        task.className = "task add_task";
+        //zmienna zawierająca wyświetlanie klikniętej daty 
+        taskDateElement.textContent = event.target.dataset.date;
     }
-    
 })
+
+buttonAdd.addEventListener('click',function(event){
+    const date = taskDateElement.textContent;
+    const form = document.getElementById('form');
+    const formData = new FormData(form);
+    formData.append('date', date);
+    const formDataObject = {};
+    for (let value of formData.entries()){
+        console.log(value);
+        formDataObject[value[0]] = value[1];
+    }
+    console.log(JSON.stringify(formDataObject));
+    const storageElement = localStorage.getItem(date);
+    const existingEvents = storageElement ? JSON.parse(storageElement) : {};
+    console.log(existingEvents);
+    if (existingEvents[formDataObject.time]){
+        if(!window.confirm("Wydarzenie o godzinie " + formDataObject.time + " już istnieje, czy chcesz nadpisać?")){
+            console.log("zapisz dane do localStorage");
+            return;
+        }
+    }
+    existingEvents[formDataObject.time] = formDataObject;
+    localStorage.setItem(date , JSON.stringify(existingEvents));
+})
+// dla tych dni które mają wpis w localstorage wyświetlić znak że jest już jakieś zadanie linia 102
