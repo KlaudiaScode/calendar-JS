@@ -9,6 +9,7 @@ body {
     display: inline-block;
     background-color: darkgray;
     font-family: 'Palatino Linotype';
+    border-radius: 7px;
 }
 .header {
     height: 10%;
@@ -16,15 +17,19 @@ body {
     background-color: orange;
     justify-content: space-between;
     font-size: 48px;
+    border-radius: 7px;
 }
 button{
     width: 10%;
     background-color: darkgoldenrod;
+    font-size: 50%;
     border-color: gray;
+    border-radius: 7px;
 }
 .date_clicked{
     height: 10%;
     width: 40%;
+    border-radius: 7px;
 }
 .table{
     display: flex;
@@ -55,6 +60,7 @@ button{
     margin-top: 2%;
     margin-right: 0.1%;
     background-color: orange;
+    object-fit: contain;
     font-size: 36px;
     text-align: center;
     cursor: pointer;
@@ -65,5 +71,30 @@ button{
     transform: translateY(4px);
 }
 .today{
-border: 2px solid brown;
+    background-color: #E3715F;
 }
+.task{
+    display: none;
+}
+.contents{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: gray;
+}
+.add_task{
+    background-color: #5997F0;
+    display: flex;
+    justify-content: space-evenly;
+}
+input[type=button]{
+    width: 10%;
+    background-color: darkgoldenrod;
+    border-color: gray;
+    border-radius: 7px;
+}
+input[type=time]{
+    background-color: goldenrod;
+}
+textarea::placeholder {
+    color: rgb(9, 10, 10);
+  }
