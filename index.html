@@ -29,11 +29,20 @@
       </div>
       <form id="form">
         <div class="task">
-        <span id="date"></span>
-        <input name="time" type="time" class="task_time"/>
-        <textarea name="contents" placeholder="wpisz treść zadania"class="contents"></textarea>
-        <input name="add" type="button" id="add" value="Dodaj"/>
-      </div>
+          <div class="selected_date">
+            <div id="date" class="selected_day"></div>
+            <button id="close" type="button" class="close">
+              <img src="btn/close.svg">
+            </button>
+          </div>
+          <div class="new_task">
+            <input name="time" type="time" class="time"/>
+            <textarea name="contents"placeholder="wpisz treść zadania"class="contents"></textarea>
+            <input name="add" type="button" id="add" value="ADD"/>
+          </div>
+          <ul class="todo_list">
+          </ul>
+        </div>
       </form>
     </div>
 	<script src="index.js"></script>

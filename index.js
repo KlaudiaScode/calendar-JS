@@ -2,7 +2,11 @@ const singleDayContainer = document.getElementById('days_of_the_month');
 const buttonNext = document.querySelector('button.next');
 const buttonBack = document.querySelector('button.back');
 const buttonAdd = document.querySelector('#add');
+const buttonClose = document.querySelector('#close');
 const taskDateElement = document.querySelector('#date');
+const todoListContainer = document.querySelector('ul.todo_list');
+const task = document.querySelector('div.task');
+const input = document.querySelector('input.task_time');
 
 //funckja tworzenia daty 
 function createDataSet(year,month,day){
@@ -99,8 +103,12 @@ function renderCalendar(currentYear,currentMonth,currentDay){
             //to nadaj mu osobną klasę 
             dayElement.className = "single_day proper_day today";
         }
-       
-        dayElement.setAttribute("data-date", `${year}-${('0' + (month + 1)).slice(-2)}-${('0' + dayNumber).slice(-2)}`);
+        const date = `${year}-${('0' + (month + 1)).slice(-2)}-${('0' + dayNumber).slice(-2)}`;
+        const storageData = localStorage[date];
+        if(storageData){
+            dayElement.className = "single_day proper_day deadline";
+        }
+        dayElement.setAttribute("data-date",date);
         singleDayContainer.append(dayElement);
     });
     //zmienna zawierająca następny miesiąc
@@ -135,29 +143,75 @@ function renderEmptyDivs(firstDay){
 }
 //nasłuchiwanie kliknięcia na wybrany dzień w miesiącu 
 singleDayContainer.addEventListener('click',function(event){
-    const task = document.querySelector('div.task');
     //warunek wykonaj jeśli kliknięty został obiekt o klasie proper_day
     if(event.target.className.includes("proper_day")){
+        //dodaj mu nową klasę 
         task.className = "task add_task";
+        const date = event.target.dataset.date;
         //zmienna zawierająca wyświetlanie klikniętej daty 
-        taskDateElement.textContent = event.target.dataset.date;
+        taskDateElement.textContent = date;
+        const existingEvents = getFromLocalStorageByDate(date);
+        todoListContainer.innerHTML = '';
+        Object.keys(existingEvents).forEach((time)=>{
+            const event = existingEvents[time];
+            const li = document.createElement("li");
+            const timeTask = document.createElement("time");
+            const label = document.createElement("label");
+            const button = document.createElement("button");
+            const span = document.createElement("span");
+            const checkobox = document.createElement("input");
+            timeTask.textContent = event.time;
+            span.textContent = event.contents;
+            button.setAttribute('class','edit');
+            checkobox.setAttribute('type','checkbox');
+            if(event.done){
+               checkobox.setAttribute('checked',event.done);
+            }
+            checkobox.addEventListener('click',function(event){
+                const dateEvents = getFromLocalStorageByDate(date);
+                const currentEvent = dateEvents[time];
+                const done = event.target.checked;
+                const newCurrentEvent = {
+                    ...currentEvent,
+                    done
+                }
+                const newDateEvents = {
+                    ...dateEvents,
+                    [time]: newCurrentEvent
+                }
+                localStorage.setItem(date,JSON.stringify(newDateEvents));
+            })
+            label.append(checkobox);
+            label.append(span);
+            li.append(timeTask);
+            li.append(label);
+            li.append(button);
+            todoListContainer.append(li);
+        })
     }
 })
-
+//nasłuchiwanie na kliknięcie przycisku dodaj zadanie
 buttonAdd.addEventListener('click',function(event){
     const date = taskDateElement.textContent;
+    console.log('date',date);
+    const taskTime = input.value;
     const form = document.getElementById('form');
     const formData = new FormData(form);
     formData.append('date', date);
+    formData.append('done', false);
     const formDataObject = {};
     for (let value of formData.entries()){
         console.log(value);
         formDataObject[value[0]] = value[1];
     }
+    if(!taskTime){
+        alert("nie podano godziny")
+        return;
+    }
     console.log(JSON.stringify(formDataObject));
-    const storageElement = localStorage.getItem(date);
-    const existingEvents = storageElement ? JSON.parse(storageElement) : {};
+    const existingEvents = getFromLocalStorageByDate(date);
     console.log(existingEvents);
+
     if (existingEvents[formDataObject.time]){
         if(!window.confirm("Wydarzenie o godzinie " + formDataObject.time + " już istnieje, czy chcesz nadpisać?")){
             console.log("zapisz dane do localStorage");
@@ -165,6 +219,16 @@ buttonAdd.addEventListener('click',function(event){
         }
     }
     existingEvents[formDataObject.time] = formDataObject;
-    localStorage.setItem(date , JSON.stringify(existingEvents));
+    localStorage.setItem(date, JSON.stringify(existingEvents));
+     //przeładowanie strony 
+     location.reload();
 })
-// dla tych dni które mają wpis w localstorage wyświetlić znak że jest już jakieś zadanie linia 102
+//funkcja dodawania daty do pamięci lokalnej
+function getFromLocalStorageByDate(date){
+    const storageElement = localStorage.getItem(date);
+    const existingEvents = storageElement ? JSON.parse(storageElement) : {};
+    return existingEvents;
+}
+buttonClose.addEventListener('click',function(event){
+    task.className = 'task';
+})
