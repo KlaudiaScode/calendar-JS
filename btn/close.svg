@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--part of the rodentia icon theme by sixsixfive released under CC0 (https://creativecommons.org/publicdomain/zero/1.0/) on openclipart-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 48 48">
+ <defs id="0">
+  <linearGradient id="2">
+   <stop id="B" stop-color="#2e3436"/>
+   <stop id="C" offset="1" stop-color="#2e3436" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="3">
+   <stop id="D" stop-color="#3465a4"/>
+   <stop id="E" offset="1" stop-color="#729fcf"/>
+  </linearGradient>
+  <linearGradient id="4">
+   <stop id="F" stop-color="#fff"/>
+   <stop id="G" offset="1" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+  <linearGradient id="5">
+   <stop id="H" stop-color="#fff" stop-opacity="0.8"/>
+   <stop id="I" offset="1" stop-color="#fff" stop-opacity="0"/>
+  </linearGradient>
+  <radialGradient cx="32.646" cy="47.02" r="16.741" id="6" xlink:href="#2" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1,0,0,0.1916667,0,38.0106)"/>
+  <linearGradient y1="1.743" x2="0" y2="46.26" id="7" xlink:href="#3" gradientUnits="userSpaceOnUse"/>
+  <linearGradient y1="3" x2="0" y2="45" id="8" xlink:href="#5" gradientUnits="userSpaceOnUse"/>
+  <linearGradient x1="16" y1="-7.877" x2="24.734" y2="28.566" id="9" xlink:href="#4" gradientUnits="userSpaceOnUse"/>
+ </defs>
+ <g transform="translate(0.1954693,0.3338773)" id="1">
+  <g id="A">
+   <path d="m 49.387003,47.023422 a 16.741358,3.20876 0 1 1 -33.482716,0 16.741358,3.20876 0 1 1 33.482716,0 z" transform="matrix(0.672499,0,0,1.0234813,-10.099649,-4.0794538)" id="J" opacity="0.4" fill="url(#6)"/>
+   <path d="m 49.387003,47.023422 a 16.741358,3.20876 0 1 1 -33.482716,0 16.741358,3.20876 0 1 1 33.482716,0 z" transform="matrix(0.672499,0,0,1.0234813,13.800383,-4.0794538)" id="K" opacity="0.4" fill="url(#6)"/>
+   <g transform="translate(0,-1.7425651)" id="L">
+    <path d="M 4.8022567,10.959376 16.770576,23.896228 3.69536,37.524892 11.997084,45.757435 23.965399,31.782866 35.656996,45.757435 45.203987,36.833082 32.128767,23.2736 44.650531,10.198384 35.933715,2.2425651 24.657216,15.179419 14.141695,2.3809273 4.8022567,10.959376 z" id="M" fill="url(#7)" stroke="#183768"/>
+    <path d="M 36,3.5 25.3125,15.75 a 0.8732137,0.8732137 0 0 1 -1.34375,0 L 14.0625,3.65625 l -8,7.375 11.375,12.28125 A 0.8732137,0.8732137 0 0 1 17.40625,24.5 l -12.5,13 7.0625,6.96875 11.34375,-13.25 a 0.8732137,0.8732137 0 0 1 1.3125,0 L 35.75,44.5 44,36.8125 31.5,23.875 a 0.8732137,0.8732137 0 0 1 0,-1.1875 L 43.40625,10.25 36,3.5 z" id="N" opacity="0.8" fill="none" stroke="url(#8)"/>
+    <path d="M 35.96875,2.90625 25,15.5 A 0.46376079,0.46376079 0 0 1 24.3125,15.46875 L 14.125,3.03125 5.46875,11 15.4375,21.78125 c 8.197395,-3.211661 16.594675,-6.103586 25.1875,-8.0625 l 3.375,-3.5 -8.03125,-7.3125 z" id="O" opacity="0.6" fill="url(#9)"/>
+   </g>
+  </g>
+ </g>
+</svg>

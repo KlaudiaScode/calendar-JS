@@ -3,25 +3,25 @@ body {
     background-color: rgb(45, 49, 56);
     text-align: center;
 }
-.calendar_body{
+.calendar_body {
     width: 34%;
     height: fit-content;
     display: inline-block;
-    background-color: darkgray;
+    background-color:#efe2ba;
     font-family: 'Palatino Linotype';
     border-radius: 7px;
 }
 .header {
     height: 10%;
     display: flex;
-    background-color: orange;
+    background-color: #d79922;
     justify-content: space-between;
     font-size: 48px;
     border-radius: 7px;
 }
-button{
+.back, .next{
     width: 10%;
-    background-color: darkgoldenrod;
+    background-color:#d79922;
     font-size: 50%;
     border-color: gray;
     border-radius: 7px;
@@ -38,7 +38,7 @@ button{
 }
 .days_of_the_week{
     height: 10%;
-    background-color: gray;
+    background-color: #4056a1;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-evenly;
@@ -59,7 +59,7 @@ button{
     width: 14%;
     margin-top: 2%;
     margin-right: 0.1%;
-    background-color: orange;
+    background-color: #c5cbe3;
     object-fit: contain;
     font-size: 36px;
     text-align: center;
@@ -71,30 +71,96 @@ button{
     transform: translateY(4px);
 }
 .today{
-    background-color: #E3715F;
+    background-color: #d79922;
+}
+.deadline{
+    font-weight: 900;
 }
 .task{
     display: none;
 }
+.add_task{
+    background-color:#efe2ba;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.selected_date{
+    background-color: #d79922;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.selected_day{
+    border-radius: 7px;
+    font-size: 38px;
+}
+img{
+    width: 30px;
+    height: 30px;
+}
+.close{
+    border-color: gray;
+    border-radius: 7px;
+    background-color:#f13c20;;
+}
+.edit{
+    background: url("btn/edit.svg") no-repeat center;
+    width: 50px;
+    border-color: #4056a1;
+    border-radius: 7px;
+}
+.new_task{
+    display: flex;
+    margin-top: 2%;
+    background-color: #4056a1;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
 .contents{
     display: flex;
     flex-wrap: wrap;
-    background-color: gray;
-}
-.add_task{
-    background-color: #5997F0;
-    display: flex;
-    justify-content: space-evenly;
+    background-color: #c5cbe3;
 }
 input[type=button]{
     width: 10%;
-    background-color: darkgoldenrod;
+    background-color: #c5cbe3;
     border-color: gray;
     border-radius: 7px;
 }
 input[type=time]{
-    background-color: goldenrod;
+    background-color:#c5cbe3;
 }
 textarea::placeholder {
     color: rgb(9, 10, 10);
-  }
+}
+.todo_list{
+    padding-left: 10%;
+    padding-right: 10%;
+}
+li{
+    margin-bottom: 5px;
+    background-color: #c5cbe3;
+    font-size: 36px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.closed{
+    display: none;
+}
+time{
+    display: flex;
+    justify-content: flex-start;
+}
+.input-danger {
+    border: 3px solid red;
+    color: red;
+}
+.input_info_danger {
+    color: red;
+}
