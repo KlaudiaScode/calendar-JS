@@ -112,6 +112,13 @@ img{
     border-color: #4056a1;
     border-radius: 7px;
 }
+.save{
+    background: url("btn/save.svg") no-repeat center;
+    width: 50px;
+    border-color: #4056a1;
+    border-radius: 7px;
+    cursor: pointer;
+}
 .new_task{
     display: flex;
     margin-top: 2%;
@@ -153,7 +160,7 @@ li{
 .closed{
     display: none;
 }
-time{
+.time{
     display: flex;
     justify-content: flex-start;
 }
