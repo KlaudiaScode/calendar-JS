@@ -11,39 +11,34 @@ const input = document.querySelector('input.time');
 
 const replaceSaveWithEditEvent = new Event ('replaceSaveWithEdit');
 
-document.addEventListener('replaceSaveWithEdit',function(){
+document.addEventListener('replaceSaveWithEdit',function(event){
     const elementSave = document.querySelector('.save');
-    console.log(elementSave);
-    const rodzicSave = elementSave.parentElement;
-    console.log(rodzicSave);
-    rodzicSave.removeChild(elementSave);
-    const buttonEdit = createEditButton();
-    rodzicSave.appendChild(buttonEdit);
+    const parentSave = elementSave.parentElement;
+    parentSave.removeChild(elementSave);
+    const buttonEdit = createEditButton(event.lineIndex);
+    parentSave.appendChild(buttonEdit);
 })
 
 const replaceEditWithSaveEvent = new Event('replaceEditWithSave');
 
 document.addEventListener('replaceEditWithSave',function(event){
-    console.log(event.lineIndex);
     const el = document.querySelector('.to_remove');
-    const rodzic = el.parentElement;
-    rodzic.removeChild(el);
+    const parentEl = el.parentElement;
+    parentEl.removeChild(el);
     const buttonSave = document.createElement('button');
     buttonSave.className = 'save';
-    buttonSave.addEventListener('click',function(event){
-        event.preventDefault();
-        console.log('rodzic',rodzic)
-        const timeTask = rodzic.querySelector('.event-time');
-        const span = rodzic.querySelector('.event-content');
+    buttonSave.addEventListener('click',function(clickEvent){
+        clickEvent.preventDefault();
+        const timeTask = parentEl.querySelector('.event-time');
+        const span = parentEl.querySelector('.event-content');
         timeTask.contentEditable = false;
-        timeTask.style.backgroundColor = '#4056a1';
+        timeTask.style.backgroundColor = '#c5cbe3';
         span.contentEditable = false;
-        span.style.backgroundColor = '#4056a1';
+        span.style.backgroundColor = '#c5cbe3';
         const date = document.getElementById('date').textContent;
         const currentEvent = JSON.parse(localStorage.getItem(date) || '{}');
         const oldTime = timeTask.dataset.time;
         const newTime = timeTask.textContent;
-        console.log(oldTime, newTime, currentEvent);
         const currentTask = {...currentEvent[oldTime]};
         if(oldTime !== newTime){
             delete currentEvent[oldTime];
@@ -52,10 +47,10 @@ document.addEventListener('replaceEditWithSave',function(event){
         currentTask.contents = span.textContent;
         currentEvent[newTime] = currentTask;
         localStorage.setItem(date, JSON.stringify(currentEvent));
-        //wywołać nowy event
+        replaceSaveWithEditEvent.lineIndex = event.lineIndex;
         document.dispatchEvent(replaceSaveWithEditEvent);
     });
-    rodzic.appendChild(buttonSave);
+    parentEl.appendChild(buttonSave);
 })
 
 //funckja tworzenia daty 
@@ -145,6 +140,7 @@ function renderEmptyDivs(firstDay){
 //PD.zmienić adresowanie po id na klasę event-time i event-content
 //funckja tworzenia przycisku do edycji 
 function createEditButton(index){
+    console.log('createEditButton index',index)
     const buttonEdit = document.createElement('button');
     buttonEdit.setAttribute('class','edit');
     console.log('index',index);
@@ -172,7 +168,6 @@ singleDayContainer.addEventListener('click',function(event){
 })
 //otwieranie okna z terminarzem na wybrany dzień miesiąca
 function openDayEdit(date){
-    console.log(date);
     task.className = 'task add_task';
     taskDateElement.textContent = date;
     const existingEvents = getFromLocalStorageByDate(date);
@@ -226,7 +221,6 @@ buttonClose.addEventListener('click',function(event){
 buttonAdd.addEventListener('click',function(event){
     event.preventDefault();
     const date = taskDateElement.textContent;
-    console.log('date',date);
     const taskTime = input.value;
     const form = document.getElementById('form');
     const formData = new FormData(form);
@@ -241,13 +235,10 @@ buttonAdd.addEventListener('click',function(event){
         alert('nie podano godziny')
         return;
     }
-    console.log(JSON.stringify(formDataObject));
     const existingEvents = getFromLocalStorageByDate(date);
-    console.log(existingEvents);
 
     if (existingEvents[formDataObject.time]){
         if(!window.confirm('Wydarzenie o godzinie ' + formDataObject.time + ' już istnieje, czy chcesz nadpisać?')){
-            console.log('zapisz dane do localStorage');
             return;
         }
     }
@@ -262,16 +253,9 @@ function getFromLocalStorageByDate(date){
     return existingEvents;
 }
 
-window.addEventListener('load',function(){
+window.addEventListener('load',function(index){
     const currentDate = (new URLSearchParams(location.search)).get('currentDate');
-    console.log(currentDate,typeof currentDate)
     if(currentDate){
         openDayEdit(currentDate);
     }
 })
-
-
-//znaleźć gdzie wołam funkcję bez przekazania indexu i przekazać go
-//zrobić commit
-
-// pobawić się z window.location
